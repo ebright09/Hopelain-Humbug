@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Hopelain's Holiday Humbug - A high-stakes marketing audit game for MBA students">
+    <meta name="theme-color" content="#003262">
+    <title>Hopelain's Holiday Humbug | Strategic Marketing Audit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'berkeley': '#003262',
+              'gold': '#FDB515',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        /* Base Reset */
+        *, *::before, *::after { box-sizing: border-box; }
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #003262;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        h1, h2, h3, .haas-font { font-family: 'Playfair Display', serif; }
+        
+        .no-select { 
+            user-select: none; 
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        /* Halo Glow Animation */
+        @keyframes halo-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(253,181,21,0.4), 0 0 30px rgba(253,181,21,0.2); }
+            50% { box-shadow: 0 0 25px rgba(253,181,21,0.6), 0 0 50px rgba(253,181,21,0.3), 0 0 80px rgba(253,181,21,0.1); }
+        }
+        .halo-glow { animation: halo-glow 3s infinite ease-in-out; }
+
+        @keyframes halo-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .halo-ring {
+            animation: halo-rotate 20s linear infinite;
+        }
+
+        /* WASTED Screen Animation */
+        @keyframes wasted-zoom {
+            0% { transform: scale(0.3) rotate(-15deg); opacity: 0; filter: blur(30px); }
+            50% { transform: scale(1.1) rotate(3deg); opacity: 1; filter: blur(0); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0); }
+        }
+        .wasted-screen { animation: wasted-zoom 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        
+        @keyframes wasted-glitch {
+            0%, 100% { text-shadow: -2px 0 red, 2px 0 cyan; }
+            25% { text-shadow: 2px 0 red, -2px 0 cyan; }
+            50% { text-shadow: -1px 0 red, 1px 0 cyan; }
+            75% { text-shadow: 1px 0 red, -1px 0 cyan; }
+        }
+        .wasted-glitch { animation: wasted-glitch 0.1s infinite; }
+
+        /* IPO Success Animation */
+        @keyframes ipo-burst {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .ipo-screen { animation: ipo-burst 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+        /* Inferno Background */
+        @keyframes inferno {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .bg-inferno {
+            background: linear-gradient(270deg, #ff0000, #ff4500, #ff8c00, #8b0000, #ff0000);
+            background-size: 400% 400%;
+            animation: inferno 2s ease infinite;
+        }
+
+        /* Rainbow Splash Effect */
+        @keyframes rainbow-splash {
+            0% { filter: hue-rotate(0deg) brightness(1); transform: scale(1); }
+            50% { filter: hue-rotate(180deg) brightness(1.2); transform: scale(1.05); }
+            100% { filter: hue-rotate(360deg) brightness(1); transform: scale(1); }
+        }
+        .rainbow-splash { animation: rainbow-splash 0.6s linear infinite; }
+
+        /* Psychedelic Burst */
+        @keyframes psych-burst {
+            0% { transform: scale(1) rotate(0deg); filter: saturate(1); }
+            25% { transform: scale(1.1) rotate(5deg); filter: saturate(2); }
+            50% { transform: scale(0.95) rotate(-5deg); filter: saturate(1.5); }
+            75% { transform: scale(1.05) rotate(3deg); filter: saturate(2.5); }
+            100% { transform: scale(1) rotate(0deg); filter: saturate(1); }
+        }
+        .psych-burst { animation: psych-burst 0.5s ease-in-out infinite; }
+
+        /* Shake Effect */
+        @keyframes shake {
+            0%, 100% { transform: translate(0, 0) rotate(0); }
+            10% { transform: translate(-5px, -2px) rotate(-1deg); }
+            20% { transform: translate(5px, 2px) rotate(1deg); }
+            30% { transform: translate(-5px, 2px) rotate(0deg); }
+            40% { transform: translate(5px, -2px) rotate(1deg); }
+            50% { transform: translate(-3px, 2px) rotate(-1deg); }
+            60% { transform: translate(3px, -2px) rotate(0deg); }
+            70% { transform: translate(-2px, 2px) rotate(-1deg); }
+            80% { transform: translate(2px, -2px) rotate(1deg); }
+            90% { transform: translate(-1px, 1px) rotate(0deg); }
+        }
+        .shake { animation: shake 0.15s infinite; }
+
+        /* Particle Float Animation */
+        @keyframes float-up {
+            0% { 
+                transform: translateY(100vh) rotate(0deg) scale(1); 
+                opacity: 1; 
+            }
+            100% { 
+                transform: translateY(-20vh) rotate(720deg) scale(0); 
+                opacity: 0; 
+            }
+        }
+        .particle { 
+            position: fixed; 
+            pointer-events: none; 
+            animation: float-up 2.5s ease-out forwards;
+            z-index: 1000;
+        }
+
+        /* Money Rain for IPO */
+        @keyframes money-rain {
+            0% { 
+                transform: translateY(-10vh) rotate(0deg); 
+                opacity: 1; 
+            }
+            100% { 
+                transform: translateY(110vh) rotate(360deg); 
+                opacity: 0.8; 
+            }
+        }
+        .money-particle {
+            position: fixed;
+            pointer-events: none;
+            animation: money-rain 3s linear forwards;
+            z-index: 999;
+        }
+
+        /* Richter Meter Vibration */
+        @keyframes richter-vibe {
+            0% { transform: translateX(-1px); }
+            50% { transform: translateX(1px); }
+            100% { transform: translateX(-1px); }
+        }
+        .richter-active { animation: richter-vibe 0.05s infinite; }
+
+        /* Meter Gradient */
+        .meter-gradient {
+            background: linear-gradient(to right, 
+                #dc2626 0%, 
+                #dc2626 15%, 
+                #f97316 30%, 
+                #FDB515 50%, 
+                #84cc16 70%, 
+                #22c55e 85%, 
+                #22c55e 100%
+            );
+        }
+
+        /* Pulse for Low Health */
+        @keyframes danger-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .danger-pulse { animation: danger-pulse 0.5s ease-in-out infinite; }
+
+        /* Button Hover Effects */
+        .btn-gold {
+            background: linear-gradient(135deg, #FDB515 0%, #e5a413 100%);
+            transition: all 0.2s ease;
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(253, 181, 21, 0.4);
+        }
+        .btn-gold:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* Session Card Hover */
+        .session-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .session-card:hover {
+            transform: translateY(-4px);
+            border-color: #FDB515;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Answer Button Effect */
+        .answer-btn {
+            transition: all 0.15s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .answer-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+        .answer-btn:hover::before {
+            left: 100%;
+        }
+        .answer-btn:hover {
+            background: white;
+            color: #003262;
+            transform: scale(1.02);
+        }
+        .answer-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FDB515;
+            border-radius: 3px;
+        }
+
+        /* Mobile Specific */
+        @media (max-width: 768px) {
+            .mobile-text-sm { font-size: 0.875rem !important; }
+            .mobile-text-xs { font-size: 0.75rem !important; }
+            .mobile-p-2 { padding: 0.5rem !important; }
+            .mobile-gap-2 { gap: 0.5rem !important; }
+        }
+
+        /* Loading Dots */
+        @keyframes loading-dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+        .loading-dots::after {
+            content: '.';
+            animation: loading-dots 1.5s infinite;
+        }
+
+        /* Glow Text */
+        .glow-text {
+            text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 40px currentColor;
+        }
+    </style>
+  <script type="module" crossorigin src="./assets/index-D28B0oyy.js"></script>
+</head>
+<body class="bg-berkeley no-select">
+    <div id="root" class="h-full w-full"></div>
+</body>
+</html>
